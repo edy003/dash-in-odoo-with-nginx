@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action pour le menu -->
+    <record id="action_dash_dashboard" model="ir.actions.act_url">
+        <field name="name">Tableau de bord Dash</field>
+        <field name="url">/my_dash_module/dash/</field>
+        <field name="target">self</field>
+    </record>
+    
+    <!-- Menu principal -->
+    <menuitem id="menu_dash_root" 
+              name="Dash Dashboard" 
+              sequence="100"/>
+    
+    <!-- Sous-menu pour accéder au tableau de bord -->
+    <menuitem id="menu_dash_dashboard" 
+              name="Visualiser le Dashboard" 
+              parent="menu_dash_root"
+              action="action_dash_dashboard" 
+              sequence="10"/>
+</odoo>

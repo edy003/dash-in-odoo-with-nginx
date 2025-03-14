@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Odoo18",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "python": "C:\\Users\\EDY\\Desktop\\odoo\\python\\python.exe",
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}\\odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}\\odoo.conf"
+            ],
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "envFile": "${workspaceFolder}\\.env"
+        }
+    ]
+}
