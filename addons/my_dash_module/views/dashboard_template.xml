@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="dashboard_template" name="Dashboard Page">
+        <t t-call="website.layout">
+            <t t-set="title">Dashboard</t>
+            <div class="container">
+                <h1>Tableau de Bord</h1>
+                <iframe t-att-src="'http://127.0.0.1:8050/dash/'"
+                        width="100%" height="800px" style="border:none;"></iframe>
+            </div>
+        </t>
+    </template>
+</odoo>

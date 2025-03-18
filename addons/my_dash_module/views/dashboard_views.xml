@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vue formulaire -->
+        <record id="view_dash_dashboard_form" model="ir.ui.view">
+            <field name="name">dash.dashboard.form</field>
+            <field name="model">dash.dashboard</field>
+            <field name="arch" type="xml">
+                <form string="Tableau de bord Dash">
+                    <header>
+                        <button name="open_dashboard" string="Ouvrir le tableau de bord" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Nom du tableau de bord"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="url_path"/>
+                                <field name="is_active"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue liste -->
+        <record id="view_dash_dashboard_tree" model="ir.ui.view">
+            <field name="name">dash.dashboard.tree</field>
+            <field name="model">dash.dashboard</field>
+            <field name="arch" type="xml">
+                <tree string="Tableaux de bord Dash">
+                    <field name="name"/>
+                    <field name="url_path"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_dash_dashboard" model="ir.actions.act_window">
+            <field name="name">Tableaux de bord Dash</field>
+            <field name="res_model">dash.dashboard</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer votre premier tableau de bord Dash
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
