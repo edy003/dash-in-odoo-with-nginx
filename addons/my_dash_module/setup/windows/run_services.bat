@@ -7,7 +7,7 @@ set ADDONS_PATH=C:\Users\EDY\Desktop\mon_projet_odoo\addons\
 set DB_NAME=ma_base_de_donnees
 set DASH_PATH=C:\Users\EDY\Desktop\mon_projet_odoo\addons\my_dash_module\dash_app\
 set NGINX_PATH=C:\Users\EDY\Desktop\mon_projet_odoo\addons\my_dash_module\setup\nginx-1.27.4
-set VENV_PATH=C:\Users\EDY\Desktop\mon_projet_odoo\venv\Scripts\activate.bat
+set PYTHON_EXE=C:\Users\EDY\Desktop\mon_projet_odoo\venv\Scripts\python.exe
 
 :: Vérifier que les chemins existent
 if not exist "%ODOO_PATH%" (
@@ -22,31 +22,27 @@ if not exist "%NGINX_PATH%" (
     echo Le chemin de Nginx n'existe pas: %NGINX_PATH%
     goto :error
 )
+if not exist "%PYTHON_EXE%" (
+    echo Python du venv introuvable: %PYTHON_EXE%
+    goto :error
+)
 
-:: Start Odoo avec l'environnement virtuel
-start cmd /k "if exist "%VENV_PATH%" (call "%VENV_PATH%" & cd %ODOO_PATH% & python odoo-bin --addons-path=%ADDONS_PATH% -d %DB_NAME%) else (echo Environnement virtuel non trouvé & pause)"
+:: Démarrer Odoo avec Python du venv
+start cmd /k "cd /d %ODOO_PATH% && %PYTHON_EXE% odoo-bin --addons-path=%ADDONS_PATH% -d %DB_NAME%"
 
-:: Start Dash avec l'environnement virtuel (directement dans le dossier de l'app)
-start cmd /k "if exist "%VENV_PATH%" (call "%VENV_PATH%" & cd %DASH_PATH% & python app.py) else (echo Environnement virtuel non trouvé & pause)"
+:: Démarrer Dash avec Python du venv
+start cmd /k "cd /d %DASH_PATH% && %PYTHON_EXE% app.py"
 
-:: Start Nginx if not already running
+:: Démarrer Nginx si ce n'est pas déjà fait
 tasklist /FI "IMAGENAME eq nginx.exe" 2>NUL | find /I /N "nginx.exe">NUL
 if "%ERRORLEVEL%"=="1" (
-    cd %NGINX_PATH%
+    cd /d %NGINX_PATH%
     start nginx.exe
 )
 
 echo Services started successfully!
 echo Odoo: http://localhost:80
 echo Dash: http://localhost:80/dash/
-
-:: Informations pour la première connexion
-echo.
-echo IMPORTANT: Lors de la première connexion à Odoo:
-echo 1. Accédez à http://localhost:80
-echo 2. Créez votre base de données avec vos identifiants administrateur
-echo 3. Utilisez ces mêmes identifiants pour les connexions futures
-echo.
 
 goto :end
 
